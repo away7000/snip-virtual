@@ -1,0 +1,813 @@
+[
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [],
+        "name": "AccessControlBadConfirmation",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "neededRole",
+                "type": "bytes32"
+            }
+        ],
+        "name": "AccessControlUnauthorizedAccount",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidInitialization",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotInitializing",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            }
+        ],
+        "name": "GenesisCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint64",
+                "name": "version",
+                "type": "uint64"
+            }
+        ],
+        "name": "Initialized",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "previousAdminRole",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "newAdminRole",
+                "type": "bytes32"
+            }
+        ],
+        "name": "RoleAdminChanged",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleGranted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            }
+        ],
+        "name": "RoleRevoked",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "ADMIN_ROLE",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "BONDING_ROLE",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "DEFAULT_ADMIN_ROLE",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "OPERATION_ROLE",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "name": "cancelGenesis",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "startTime",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "endTime",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "genesisName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "genesisTicker",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint8[]",
+                        "name": "genesisCores",
+                        "type": "uint8[]"
+                    }
+                ],
+                "internalType": "struct GenesisCreationParams",
+                "name": "gParams",
+                "type": "tuple"
+            }
+        ],
+        "name": "createGenesis",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "genesisContracts",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "genesisID",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            }
+        ],
+        "name": "getRoleAdmin",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "grantRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "hasRole",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "virtualToken",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "reserve",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "maxContribution",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "feeAddr",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "feeAmt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "duration",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "tbaSalt",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tbaImpl",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "votePeriod",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "threshold",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "agentFactory",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "agentTokenTotalSupply",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "agentTokenLpSupply",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct FGenesis.Params",
+                "name": "p",
+                "type": "tuple"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "participantIndexes",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "onGenesisFailed",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address[]",
+                        "name": "refundAddresses",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "refundAmounts",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address[]",
+                        "name": "distributeAddresses",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "distributeAmounts",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "creator",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct SuccessParams",
+                "name": "p",
+                "type": "tuple"
+            }
+        ],
+        "name": "onGenesisSuccess",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address[]",
+                        "name": "refundAddresses",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "refundAmounts",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address[]",
+                        "name": "distributeAddresses",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "distributeAmounts",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "creator",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct SuccessParams",
+                "name": "p",
+                "type": "tuple"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "salt",
+                "type": "bytes32"
+            }
+        ],
+        "name": "onGenesisSuccessSalt",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "params",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "virtualToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "reserve",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxContribution",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "feeAddr",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "feeAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "duration",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tbaSalt",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "tbaImpl",
+                "type": "address"
+            },
+            {
+                "internalType": "uint32",
+                "name": "votePeriod",
+                "type": "uint32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "threshold",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "agentFactory",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "agentTokenTotalSupply",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "agentTokenLpSupply",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "callerConfirmation",
+                "type": "address"
+            }
+        ],
+        "name": "renounceRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "newStartTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "newEndTime",
+                "type": "uint256"
+            }
+        ],
+        "name": "resetTime",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "role",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "revokeRole",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "virtualToken",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "reserve",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "maxContribution",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "feeAddr",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "feeAmt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "duration",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "tbaSalt",
+                        "type": "bytes32"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tbaImpl",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint32",
+                        "name": "votePeriod",
+                        "type": "uint32"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "threshold",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "agentFactory",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "agentTokenTotalSupply",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "agentTokenLpSupply",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct FGenesis.Params",
+                "name": "p",
+                "type": "tuple"
+            }
+        ],
+        "name": "setParams",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes4",
+                "name": "interfaceId",
+                "type": "bytes4"
+            }
+        ],
+        "name": "supportsInterface",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "withdrawLeftAssetsAfterFinalized",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
