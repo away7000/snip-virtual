@@ -2,6 +2,6 @@
 
 npm install
 
-npm listen.js
+node listen.js
 
 isi pk sama buyAmount
